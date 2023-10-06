@@ -15,18 +15,34 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+<?php
 
-			get_template_part( 'template-parts/content', 'page' );
+if (have_posts()) :
 
-		endwhile; // End of the loop.
-		?>
+	if (is_home() && !is_front_page()) :
+?>
+		<header>
+			<h1 class="page-title screen-reader-text"><?php single_posts_title(); ?></h1>
+		</header>
+<?php
 
-	</main><!-- #main -->
+/* AFFICHAGE DES PUBLICATIONS SUR LA PAGE */
+	endif;
+
+	while (have_posts()) :
+		the_post();
+
+		get_template_part('template-parts/content');
+
+	endwhile; // Fin de la boucle.
+?>
+
+
+<?php endif; ?>
+
+</main><!-- #main -->
 
 <?php
 get_sidebar();

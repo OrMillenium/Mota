@@ -18,7 +18,7 @@
     </a>  
 
 
-    <nav class="navigation">
+    <nav role="navigation">
         <?php
         
         wp_nav_menu([
