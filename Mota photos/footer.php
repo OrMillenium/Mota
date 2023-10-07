@@ -9,12 +9,13 @@
       ]);
         ?>
 </nav>
+
+
 </footer>
 
 
+<?php get_template_part('template-parts/modale'); 
 
-
-
-<?php wp_footer(); ?>
+ wp_footer(); ?>
 </body>
 </html>

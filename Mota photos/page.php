@@ -36,7 +36,7 @@ if (have_posts()) :
 
 		get_template_part('template-parts/content');
 
-	endwhile; // Fin de la boucle.
+	endwhile; 
 ?>
 
 

@@ -23,7 +23,18 @@
         
         wp_nav_menu([
           'theme_location' => 'main-menu',
+          
       ]);
         ?>
      </nav>
   </header>
+ 
+   
+    <?php wp_footer(); ?>
+</body>
+</html>
+
+
+
+
+

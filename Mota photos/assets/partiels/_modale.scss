@@ -1,0 +1,79 @@
+.popup-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #00000060;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+
+.popup-contact{
+    background:white;
+    position:relative;
+    width: 597px;
+    height: 769px;
+    border: 5px solid #000000;
+
+}
+
+
+
+#wpcf7-f44-o1 > form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+
+    label{
+        font-family: Poppins;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0em;
+         text-align: left;
+         color: #313144;
+
+    }
+
+    input{
+        width: 263px;
+        height: 37px;
+        border-radius: 8px;
+        border: 1px solid #B8BBC2
+    }
+    p{
+        
+        top: 170px;
+        left: 165px;
+        padding: 1px, 0px, 0px, 0px;
+        gap: 2px;
+
+    }
+}
+
+#wpcf7-f44-o1 > form > p:nth-child(5) > label > span > textarea{
+    width: 263px;
+    height: 210px;
+    top: 23px;
+    border-radius: 8px;
+    border: 1px;
+    border: 1px solid #B8BBC2;
+
+}
+
+#wpcf7-f44-o1 > form > p:nth-child(6) > input{
+    width: 263px;
+    height: 50px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    background: #D8D8D8;
+    margin-top: -14px;
+
+}
