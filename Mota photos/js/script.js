@@ -35,3 +35,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 });
+
+/*Ouverture menu*/
+
+const toggle_btn = document.querySelector('.toggle_btn');
+const burger = document.querySelector('.Menu');
+
+toggle_btn.addEventListener('click', () => {
+burger.classList.toggle('nav_open');
+toggle_btn.classList.toggle('active');
+  });
+
+   
+/*Fermeture menu sur click lien*/
+
+//const menuLinks = document.querySelectorAll('.MenuFull ul li a');
+      // menuLinks.forEach(link => {
+         //  link.addEventListener('click', () => {
+            //   burger.classList.remove('nav_open');
+            //   toggle_btn.classList.remove('active');
+          // })});
