@@ -162,10 +162,9 @@ body a {
   text-transform: uppercase;
 }
 
-#sidebar {
-  display: none;
-}
-
+/*#sidebar{
+    display: none;
+}*/
 .popup-overlay {
   position: fixed;
   width: 100%;
@@ -232,9 +231,9 @@ body a {
   margin-top: -14px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .popup-contact {
-    width: 90%; /* Adjust the width as needed */
+    width: 80%; /* Adjust the width as needed */
     height: 90%; /* Allow the height to adjust based on content */
     max-width: 400px; /* Set a maximum width if desired */
     border: 3px solid #000000;
@@ -261,39 +260,4 @@ body a {
     width: 70%; /* Ajustez la largeur selon vos besoins */
     max-width: 600px; /* Définissez une largeur maximale si nécessaire */
   }
-  .popup-overlay {
-    position: fixed;
-    width: 81%;
-    height: 100%;
-  }
-}
-@font-face {
-  font-family: "Space Mono";
-  src: url("assets/fonts/SpaceMono-Regular.ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Space Mono";
-  src: url("assets/fonts/SpaceMono-Italic.ttf");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Space Mono";
-  src: url("assets/fonts/SpaceMono-Bold.ttf");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Space Mono";
-  src: url("assets/fonts/SpaceMono-BoldItalic.ttf");
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 300;
-  src: local("Poppins"), url("../Mota/assets/fonts/poppins/Poppins-Light.woff") format("woff"), url("../Mota/assets/fonts/poppins/Poppins-Light.woff2") format("woff2");
 }/*# sourceMappingURL=style.css.map */
