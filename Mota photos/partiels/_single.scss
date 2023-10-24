@@ -58,7 +58,7 @@
         
     }
 }
- .contact-btn{
+ #contact-btn{
     width: 272px;
     height: 50px;
     line-height: 100%;
@@ -143,6 +143,9 @@
     object-fit: cover;
     width: 564px;
     height: 495px;
+    margin-bottom: 10px;
+
+
         & img{
         width:564px;
         height: 495px;
@@ -156,7 +159,7 @@
         }
 }
 
-.photos-btn {
+#all_photos {
     width: 272px;
     height: 50px;
     line-height: 100%;

@@ -41,7 +41,7 @@ $annees = get_the_terms(get_the_ID(), 'annee');
     <div class="contenairContact"> 
          <div class="contact"> 
              <p> Cette photo vous intéresse ? </p>
-             <button type="button" class="contact-btn" id="contactButton" data-reference="<?php echo $reference; ?>">Contact</button>
+             <button id="contact-btn"  data-reference="<?php echo $reference; ?>">Contact</button>
          </div>
          <div class="nav-photos">
          
@@ -69,54 +69,56 @@ echo "Right Image URL: $right_image_url <br>";
 
 </section>
 
-</section>
-
-
-
-<div class="Title"><h3>VOUS AIMEREZ AUSSI</h3></div>
+<div class="Title">
+    <h3>VOUS AIMEREZ AUSSI</h3>
+</div>
 <section class="Related">
-  
-        <?php
-        $categories = get_the_terms(get_the_ID(), 'categorie');
 
-        if ($categories && !is_wp_error($categories)) { 
-            $category_ids = wp_list_pluck($categories, 'term_id');
+    <?php
+    $categories = get_the_terms(get_the_ID(), 'categorie');
 
-            $args = array(
-                'post_type' => 'photo',
-                'posts_per_page' => 2,
-                'post__not_in' => array(get_the_ID()),
-                'tax_query' => array(
-                    array(
-                        'taxonomy' => 'categorie',
-                        'field' => 'term_id',
-                        'terms' => $category_ids,
-                    ),
+    if ($categories && !is_wp_error($categories)) {
+        $category_ids = wp_list_pluck($categories, 'term_id');
+
+        $args = array(
+            'post_type' => 'photo',
+            'posts_per_page' => 2,
+            'post__not_in' => array(get_the_ID()),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'categorie',
+                    'field' => 'term_id',
+                    'terms' => $category_ids,
                 ),
-            );
+            ),
+        );
 
-            $related_photos = new WP_Query($args);
+        $related_photos = new WP_Query($args);
 
-            if ($related_photos->have_posts()) {
-                while ($related_photos->have_posts()) {
-                    $related_photos->the_post();
-                    $photo_url = get_field('photo');
-                    ?>  
-                    
-                            <div class="related_block">
-                                <?php echo get_the_post_thumbnail(); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
-                wp_reset_postdata();
-            }
+        while ($related_photos->have_posts()) {
+            $related_photos->the_post();
+            $photo_url = get_field('photo');
+            ?>
+            <div class="related_block">
+                <?php echo get_the_post_thumbnail(); ?>
+            </div>
+            <?php
         }
-        ?>
-        
- </section>
 
-    <button type="button" class="photos-btn" id="photos">
-        <a href="<?php echo home_url(); ?>#">Toutes les photos</a>
-        </button>
+        wp_reset_postdata();
+    }
+    ?>
+
+</section>
+<button id="all_photos">Toutes les photos</button>
+    <a href="<?php echo home_url(); ?>#"></a>
+
+</button>
+
+
+
+
+
+ 
+
+    

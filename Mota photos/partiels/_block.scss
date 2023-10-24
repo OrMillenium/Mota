@@ -1,0 +1,60 @@
+.catalogue_block {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.photo-champs {
+    margin-top: 10px; /* Espacement entre les éléments */
+}
+
+.taxonomies {
+    margin-top: 10px; /* Espacement entre les éléments */
+}
+
+.taxonomies .pair {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; /* Espacement entre les paires */
+}
+
+.taxonomies .pair p {
+    margin: 0; /* Supprime la marge par défaut */
+    margin-right: 5px; /* Espacement entre l'étiquette et les valeurs */
+}
+
+.taxonomies .values {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.taxonomies .values div {
+    margin-right: 5px; /* Espacement entre les valeurs */
+}
+
+#load-more{
+    width: 272px;
+    height: 50px;
+    line-height: 100%;
+    background-color:  #D8D8D8;
+    font-family: 'SpaceMono'; 
+    font-weight: 400;
+    font-size: 12px;
+    border-radius: 2px;
+    border: none;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    
+
+    &:hover {
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
+}

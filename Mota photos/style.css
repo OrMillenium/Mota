@@ -349,7 +349,7 @@ h3 {
   width: 50%;
 }
 
-.contact-btn {
+#contact-btn {
   width: 272px;
   height: 50px;
   line-height: 100%;
@@ -360,7 +360,7 @@ h3 {
   border-radius: 2px;
   border: none;
 }
-.contact-btn:hover {
+#contact-btn:hover {
   cursor: pointer;
   background-color: black;
   color: white;
@@ -428,6 +428,7 @@ h3 {
      object-fit: cover;
   width: 564px;
   height: 495px;
+  margin-bottom: 10px;
 }
 .related_block img {
   width: 564px;
@@ -442,7 +443,7 @@ h3 {
   }
 }
 
-.photos-btn {
+#all_photos {
   width: 272px;
   height: 50px;
   line-height: 100%;
@@ -458,12 +459,12 @@ h3 {
   margin-top: 5%;
   margin-bottom: 5%;
 }
-.photos-btn:hover {
+#all_photos:hover {
   cursor: pointer;
   background-color: black;
   color: white;
 }
-.photos-btn a {
+#all_photos a {
   font-family: Space Mono;
   font-size: 12px;
   font-weight: 400;
@@ -476,4 +477,63 @@ h3 {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 5%;
+}
+
+.catalogue_block {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-champs {
+  margin-top: 10px; /* Espacement entre les éléments */
+}
+
+.taxonomies {
+  margin-top: 10px; /* Espacement entre les éléments */
+}
+
+.taxonomies .pair {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Espacement entre les paires */
+}
+
+.taxonomies .pair p {
+  margin: 0; /* Supprime la marge par défaut */
+  margin-right: 5px; /* Espacement entre l'étiquette et les valeurs */
+}
+
+.taxonomies .values {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.taxonomies .values div {
+  margin-right: 5px; /* Espacement entre les valeurs */
+}
+
+#load-more {
+  width: 272px;
+  height: 50px;
+  line-height: 100%;
+  background-color: #D8D8D8;
+  font-family: "SpaceMono";
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 2px;
+  border: none;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+#load-more:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }/*# sourceMappingURL=style.css.map */
