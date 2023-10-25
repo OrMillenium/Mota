@@ -111,9 +111,8 @@ echo "Right Image URL: $right_image_url <br>";
 
 </section>
 <button id="all_photos">Toutes les photos</button>
-    <a href="<?php echo home_url(); ?>#"></a>
+<a href="<?php echo home_url(); ?>"></a>
 
-</button>
 
 
 

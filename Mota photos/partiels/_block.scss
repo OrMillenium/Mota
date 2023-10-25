@@ -1,38 +1,85 @@
+
+.banner img{
+    width: 100%;
+    object-fit: cover;
+}
+
+h1{
+    
+        position: absolute;
+        width: 53vw;
+        height: 10vh;
+        left: 25vw;
+        top: 40vh;
+        font-family: "Space Mono", sans-serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 5vw;
+        line-height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        color: transparent;
+        -webkit-text-stroke: 3px #ffffff; /* White 3px stroke */
+        -webkit-text-fill-color: transparent;
+      }
+
+
+
+.photo-champs {
+    padding-top: 50px;
+    width: 1140px;
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+
+}
 .catalogue_block {
     display: flex;
     flex-wrap: wrap;
-    max-width: 80%;
+    width: 1140px;
     margin: auto;
-    display: flex;
     justify-content: space-between;
+    margin-top: 50px;
 }
 
-.photo-champs {
-    margin-top: 10px; /* Espacement entre les éléments */
+.custom-select {
+    width: 260px;
+    height: 43px;
+    border: 1.3px solid #B8BBC2;
+    border-radius: 8px;
+    padding-top: 11px;
+    padding-right: 18px;
+    padding-bottom: 11px;
+    padding-left: 18px;
+    
+
+    }
+
+
+.custom-select:focus {
+    outline: none; 
+    border-color: #007bff; 
 }
 
-.taxonomies {
-    margin-top: 10px; /* Espacement entre les éléments */
-}
+.term-option {
+    
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.03em;
+    text-align: left;
 
-.taxonomies .pair {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px; /* Espacement entre les paires */
+    &:hover {
+        background-color: #FFD6D6!important;
+    }
 }
-
-.taxonomies .pair p {
-    margin: 0; /* Supprime la marge par défaut */
-    margin-right: 5px; /* Espacement entre l'étiquette et les valeurs */
-}
-
-.taxonomies .values {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.taxonomies .values div {
-    margin-right: 5px; /* Espacement entre les valeurs */
+#format{
+    
+    margin-left: -274px;
 }
 
 #load-more{

@@ -1,10 +1,11 @@
 console.log("Le JavaScript fonctionne correctement!");
 
+/*Affichage modale */
 document.addEventListener('DOMContentLoaded', function() {
     const contactLink = document.querySelector('#menu-item-47 a');
     const modalOverlay = document.querySelector('.popup-overlay');
     const modalContact = document.querySelector('.popup-contact');
-    const contactButton = document.querySelector('#contactButton');
+    const contactButton = document.querySelector('#contact-btn');
 
     function openModal() {
         modalOverlay.style.display = 'flex';
@@ -32,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+/*Affichage menu burger */
+
     const toggle_btn = document.querySelector('.toggle_btn');
     const burger = document.querySelector('.Menu');
 
@@ -52,31 +55,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    var page = 1;
-    const loadMoreButton = document.getElementById('load-more');
+    
+    
 
-    if (loadMoreButton) {
-        loadMoreButton.addEventListener('click', function() {
-            page++;
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', ajaxurl, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    var response = xhr.responseText;
-                    if (response) {
-                        document.querySelector('.photo-container').insertAdjacentHTML('beforeend', response);
-                    } else {
-                        loadMoreButton.style.display = 'none';
-                    }
-                }
-            };
-            xhr.onerror = function() {
-                console.log('Erreur réseau');
-            };
-            xhr.send('action=request_photos&page=' + page);
-        });
-    }
+/*Affichage photos single photos */
 
     const arrowImages = document.querySelectorAll('.nav-arrow img.arrow');
     const minPhoto = document.querySelector('.min-photo');
@@ -90,3 +72,67 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+/*Affichage filtre ajax */
+jQuery(document).ready(function($) {
+    $('#filters select').on('change', function() {
+        var taxonomy = $(this).attr('id');
+        var term = $(this).val();
+        var data = {
+            'action': 'filter_photos',
+            'taxonomy': taxonomy,
+            'term': term
+        };
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                $('#photos-container').html(response);
+            }
+        });
+    });
+});
+
+
+
+
+/*Pagination infinie pour la section catalogue*/
+var page = 1;
+
+const loadMoreButton = document.getElementById('load-more');
+const photosContainer = document.getElementById('photos-container');
+
+if (loadMoreButton) {
+    loadMoreButton.addEventListener('click', function() {
+        page++;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', ajaxurl, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 400) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.length > 0) {
+                    response.forEach(function(photo) {
+                        var photoHTML = `
+                            <div class="related_block">
+                                <img src="${photo.thumbnail_url}" alt="${photo.post_title}">
+                            </div>
+                        `;
+                        photosContainer.insertAdjacentHTML('beforeend', photoHTML);
+                    });
+
+                    var totalPhotos = response.length;
+
+                    if (totalPhotos < 8) {
+                        loadMoreButton.style.display = 'none';
+                    }
+
+                } else {
+                    loadMoreButton.style.display = 'none';
+                }
+            }
+        };
+        xhr.send('action=request_photos&page=' + page);
+    });
+}
