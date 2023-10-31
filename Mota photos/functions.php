@@ -7,6 +7,8 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 function theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_script( 'scriptJs', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), '1.0', true );
+    wp_enqueue_script('ajax', get_template_directory_uri() . '/js/ajax.js', array('jquery'), '1.0', true);
+   
 
     $ajax_url = admin_url( 'admin-ajax.php' );
 
@@ -54,10 +56,10 @@ function register_my_supports() {
 /* Affichage photos*/
 function photos_request() {
     $page = $_POST['page'];
-    $offset = ($page - 1) * 12;
+    $offset = ($page - 1) * 8;
     $query = new WP_Query(array(
         'post_type' => 'photo',
-        'posts_per_page' => 12,
+        'posts_per_page' => 8,
         'offset' => $offset
     ));
 
@@ -67,10 +69,15 @@ function photos_request() {
 
         foreach ($posts as $post) {
             $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'thumbnail');
+            $reference = get_field('reference', $post->ID); // Ajout de la référence
+            $categorie = get_the_terms($post->ID, 'categorie')[0]->name; // Ajout de la catégorie
+
             $photos[] = array(
                 'ID' => $post->ID,
                 'post_title' => $post->post_title,
                 'thumbnail_url' => $thumbnail_url,
+                'reference' => $reference,
+                'categorie' => $categorie,
             );
         }
 
@@ -105,21 +112,22 @@ function filter_photos() {
 
     $filtered_photos = new WP_Query($args);
 
-    while ($filtered_photos->have_posts()) {
-        $filtered_photos->the_post();
+    ob_start();
+    while ($filter_photos->have_posts()) {
+        $filter_photos->the_post();
         $photo_url = get_field('photo');
         ?>
         <div class="related_block">
-            <?php echo get_the_post_thumbnail(); ?>
+            <?php echo get_the_post_thumbnail(null, 'large'); ?>
         </div>
         <?php
     }
+    $output = ob_get_clean();
+    echo $output;
 
     wp_reset_postdata();
     
     wp_die();
 }
-add_action('wp_ajax_filter_photos', 'filter_photos');
-add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
-
-?>
+add_action('wp_ajax_ajax_filter_photos', 'filter_photos');
+add_action('wp_ajax_nopriv_ajax_filter_photos', 'filter_photos');

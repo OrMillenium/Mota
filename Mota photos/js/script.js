@@ -1,11 +1,11 @@
 console.log("Le JavaScript fonctionne correctement!");
 
 /*Affichage modale */
+
 document.addEventListener('DOMContentLoaded', function() {
-    const contactLink = document.querySelector('#menu-item-47 a');
+    const contactLink = document.querySelector('#menu-item-47');
+    const contactBtn = document.querySelector('#contact-btn');
     const modalOverlay = document.querySelector('.popup-overlay');
-    const modalContact = document.querySelector('.popup-contact');
-    const contactButton = document.querySelector('#contact-btn');
 
     function openModal() {
         modalOverlay.style.display = 'flex';
@@ -15,13 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
         modalOverlay.style.display = 'none';
     }
 
-    if (contactLink && modalOverlay && contactButton) {
+    if (contactLink) {
         contactLink.addEventListener('click', function(event) {
             event.preventDefault();
             openModal();
         });
+    }
 
-        contactButton.addEventListener('click', function(event) {
+    if (contactBtn) {
+        contactBtn.addEventListener('click', function(event) {
             event.preventDefault();
             openModal();
         });
@@ -32,10 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
+});
 
 /*Affichage menu burger */
 
-    const toggle_btn = document.querySelector('.toggle_btn');
+    let toggle_btn = document.querySelector('.toggle_btn');
     const burger = document.querySelector('.Menu');
 
     if (toggle_btn && burger) {
@@ -57,82 +60,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     
+/*Ouverture et fermeture lightbox */
+$(document).ready(function() {
+    var $lightbox = $('.lightbox'); // Sélectionnez la lightbox
 
-/*Affichage photos single photos */
+    $('.fullscreen-icon').click(function(e) {
+        e.preventDefault();
 
-    const arrowImages = document.querySelectorAll('.nav-arrow img.arrow');
-    const minPhoto = document.querySelector('.min-photo');
+        var url = $(this).parent().prev().attr('src'); // Récupérez l'URL de l'image
+        var categorie = $(this).data('categorie'); // Récupérez la catégorie
+        var reference = $(this).data('reference'); // Récupérez la référence
+        var index = $(this).data('index'); // Récupérez l'index
 
-    if (minPhoto) {
-        arrowImages.forEach(arrow => {
-            arrow.addEventListener('mouseover', function() {
-                const imageUrl = arrow.getAttribute('data-image');
-                minPhoto.innerHTML = `<img src="${imageUrl}" alt="thumbnail">`;
-            });
-        });
-    }
-});
+        
+        $lightbox.data('categorie', categorie); // Stockez la catégorie dans la lightbox
+        $lightbox.data('reference', reference); // Stockez la référence dans la lightbox
+        $lightbox.data('index', index); // Stockez l'index dans la lightbox
 
-/*Affichage filtre ajax */
-jQuery(document).ready(function($) {
-    $('#filters select').on('change', function() {
-        var taxonomy = $(this).attr('id');
-        var term = $(this).val();
-        var data = {
-            'action': 'filter_photos',
-            'taxonomy': taxonomy,
-            'term': term
-        };
-        $.ajax({
-            url: ajaxurl,
-            type: 'POST',
-            data: data,
-            success: function(response) {
-                $('#photos-container').html(response);
-            }
-        });
+        // Afficher la catégorie et la référence dans la lightbox
+        $('.lightbox-category').text(categorie);
+        $('.lightbox-reference').text(reference);
+        $('.lightbox-photo').html('<img src="' + url + '">');
+        $lightbox.fadeIn();
+    });
+
+    $('.close-lightbox').click(function() {
+        $lightbox.fadeOut();
     });
 });
-
-
-
-
-/*Pagination infinie pour la section catalogue*/
-var page = 1;
-
-const loadMoreButton = document.getElementById('load-more');
-const photosContainer = document.getElementById('photos-container');
-
-if (loadMoreButton) {
-    loadMoreButton.addEventListener('click', function() {
-        page++;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', ajaxurl, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 400) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.length > 0) {
-                    response.forEach(function(photo) {
-                        var photoHTML = `
-                            <div class="related_block">
-                                <img src="${photo.thumbnail_url}" alt="${photo.post_title}">
-                            </div>
-                        `;
-                        photosContainer.insertAdjacentHTML('beforeend', photoHTML);
-                    });
-
-                    var totalPhotos = response.length;
-
-                    if (totalPhotos < 8) {
-                        loadMoreButton.style.display = 'none';
-                    }
-
-                } else {
-                    loadMoreButton.style.display = 'none';
-                }
-            }
-        };
-        xhr.send('action=request_photos&page=' + page);
-    });
-}

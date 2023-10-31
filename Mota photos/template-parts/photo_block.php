@@ -1,58 +1,59 @@
-<?php
-// Template Name: Page d'Accueil
-?>
 
-<?php get_header(); ?>
 
-<div class="photo-champs">
-<?php
-// Code pour les taxonomies
-$taxonomies = [
-    'categorie' => 'CATÉGORIES',
-    'format' => 'FORMATS',
-    'annee' => 'TRIER PAR'
-];
 
-foreach ($taxonomies as $taxonomy => $label) {
-    $terms = get_terms($taxonomy);
-    if ($terms && !is_wp_error($terms)) {
+<section class="Related">
+  <?php
+  $categories = get_the_terms(get_the_ID(), 'categorie');
+  if ($categories && !is_wp_error($categories)) {
+    $category_ids = wp_list_pluck($categories, 'term_id');
 
-        echo "<select id='$taxonomy' class='custom-select'>";
-        echo "<option value='' disabled selected class='defaultOption'>$label</option>";
-        foreach ($terms as $term) {
-            echo "<option value='$term->slug' class='term-option'>$term->name</option>"; 
-        }
-        echo "</select>";
-    }
-}
-?>
+
+    $args = array(
+      'post_type' => 'photo',
+      'posts_per_page' => 2,
+      'post__not_in' => array(get_the_ID()),
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'categorie',
+          'field' => 'term_id',
+          'terms' => $category_ids,
+        ),
+      ),
+    );
+    $related_block = new WP_Query($args);
+    while ($related_block->have_posts()) {
+      $related_block->the_post();
+      $photo_url = get_field('photo');
+      $reference = get_field('référence'); // Obtenez la référence du post
+      $categorie = get_the_terms(get_the_ID(), 'categorie')[0]->name; // Obtenez la catégorie du post
+      ?>
+
+<div class="related_block">
+    <?php echo get_the_post_thumbnail(null, 'large'); ?>
+
+    <div class="overlay">
+
+        <div class=" eye-icon">
+              <a href="<?php echo esc_url(get_permalink()); ?>">
+                <img src="<?php echo esc_url(get_template_directory_uri()) ?>/assets/img/icon_eye.svg" alt="voir la photo">
+              </a>
+        </div>
+      
+        <div class="fullscreen-icon" 
+             data-imgurl="<?php echo $photo_url; ?>" 
+             data-reference="<?php echo $reference; ?>"
+             data-categorie="<?php echo $categorie; ?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
+        </div>
+            
+    </div>
 </div>
 
-<section  id="photos-container"class="catalogue_block">
     <?php
-    $args = array(
-        'post_type' => 'photo',
-        'posts_per_page' => 8,
-       
-    );
-
-    $related_photos = new WP_Query($args);
-
-    while ($related_photos->have_posts()) {
-        $related_photos->the_post();
-        $photo_url = get_field('photo');
-        ?>
-        <div class="related_block">
-            <?php echo get_the_post_thumbnail(); ?>
-        </div>
-        <?php
-    }
-
-        wp_reset_postdata();
-    
-    ?>
-    
+    } 
+      
+   }
+    wp_reset_postdata();
+  
+  ?>
 </section>
-<button id="load-more">Charger plus</button>
-
-<?php get_footer(); ?>
