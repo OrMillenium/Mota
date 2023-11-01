@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 
 
 
-/*Pagination infinie pour la section catalogue
+/*Pagination infinie pour la section catalogue*/
 jQuery(document).ready(function ($) {
 
     let page = 2; 
@@ -71,7 +71,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-});*/
+});
     
     
     

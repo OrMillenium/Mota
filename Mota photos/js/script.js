@@ -36,52 +36,90 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+
 /*Affichage menu burger */
+let toggle_btn = document.querySelector('.toggle_btn');
+const burger = document.querySelector('.Menu');
 
-    let toggle_btn = document.querySelector('.toggle_btn');
-    const burger = document.querySelector('.Menu');
-
-    if (toggle_btn && burger) {
-        toggle_btn.addEventListener('click', () => {
-            burger.classList.toggle('nav_open');
-            toggle_btn.classList.toggle('active');
-        });
-    }
-
-    const menuLinks = document.querySelectorAll('.MenuFull ul li a');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            burger.classList.remove('nav_open');
-            if (toggle_btn) {
-                toggle_btn.classList.remove('active');
-            }
-        });
+if (toggle_btn && burger) {
+    toggle_btn.addEventListener('click', () => {
+        burger.classList.toggle('nav_open');
+        toggle_btn.classList.toggle('active');
     });
+}
 
-    
-    
+const menuLinks = document.querySelectorAll('.MenuFull ul li a');
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        burger.classList.remove('nav_open');
+        if (toggle_btn) {
+            toggle_btn.classList.remove('active');
+        }
+    });
+});
+
+/* Défilement miniatures page single */
+
+
+
+
+
+
+
 /*Ouverture et fermeture lightbox */
 $(document).ready(function() {
-    var $lightbox = $('.lightbox'); // Sélectionnez la lightbox
+    var $lightbox = $('.lightbox');
+    var relatedBlockCount = window.relatedBlockCount;
 
     $('.fullscreen-icon').click(function(e) {
         e.preventDefault();
+        var url = $(this).parent().prev().attr('src');
+        var categorie = $(this).data('categorie');
+        var reference = $(this).data('reference');
+        var index = $(this).data('index');
 
-        var url = $(this).parent().prev().attr('src'); // Récupérez l'URL de l'image
-        var categorie = $(this).data('categorie'); // Récupérez la catégorie
-        var reference = $(this).data('reference'); // Récupérez la référence
-        var index = $(this).data('index'); // Récupérez l'index
+        $lightbox.data('categorie', categorie);
+        $lightbox.data('reference', reference);
+        $lightbox.data('index', index);
 
-        
-        $lightbox.data('categorie', categorie); // Stockez la catégorie dans la lightbox
-        $lightbox.data('reference', reference); // Stockez la référence dans la lightbox
-        $lightbox.data('index', index); // Stockez l'index dans la lightbox
-
-        // Afficher la catégorie et la référence dans la lightbox
         $('.lightbox-category').text(categorie);
         $('.lightbox-reference').text(reference);
         $('.lightbox-photo').html('<img src="' + url + '">');
+
         $lightbox.fadeIn();
+    });
+
+    $('.lightbox-prev').click(function() {
+        var currentIndex = $lightbox.data('index');
+        currentIndex = (currentIndex - 1 + relatedBlockCount) % relatedBlockCount;
+        var photo_url = $('.fullscreen-icon').eq(currentIndex).data('imgurl');
+        var categorie = $('.fullscreen-icon').eq(currentIndex).data('categorie');
+        var reference = $('.fullscreen-icon').eq(currentIndex).data('reference');
+
+        $lightbox.data('categorie', categorie);
+        $lightbox.data('reference', reference);
+        $lightbox.data('index', currentIndex);
+
+        $('.lightbox-category').text(categorie);
+        $('.lightbox-reference').text(reference);
+        $('.lightbox-photo').html('<img src="' + photo_url + '">');
+    });
+
+    $('.lightbox-next').click(function() {
+        var currentIndex = $lightbox.data('index');
+        currentIndex = (currentIndex + 1) % relatedBlockCount;
+        var photo_url = $('.fullscreen-icon').eq(currentIndex).data('imgurl');
+        var categorie = $('.fullscreen-icon').eq(currentIndex).data('categorie');
+        var reference = $('.fullscreen-icon').eq(currentIndex).data('reference');
+
+        $lightbox.data('categorie', categorie);
+        $lightbox.data('reference', reference);
+        $lightbox.data('index', currentIndex);
+
+        $('.lightbox-category').text(categorie);
+        $('.lightbox-reference').text(reference);
+        $('.lightbox-photo').html('<img src="' + photo_url + '">');
     });
 
     $('.close-lightbox').click(function() {

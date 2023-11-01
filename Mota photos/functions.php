@@ -1,6 +1,5 @@
 <?php
 
-
 /* Enqueue styles */
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
@@ -8,11 +7,13 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     wp_enqueue_script( 'scriptJs', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), '1.0', true );
     wp_enqueue_script('ajax', get_template_directory_uri() . '/js/ajax.js', array('jquery'), '1.0', true);
-   
+    
 
     $ajax_url = admin_url( 'admin-ajax.php' );
 
     wp_add_inline_script( 'scriptJs', "var ajaxurl = '{$ajax_url}';", 'before' );
+    
+    
 }
 
 function register_my_supports() {
@@ -53,8 +54,10 @@ function register_my_supports() {
     register_post_type( 'photo', $args );
 }
 
+
 /* Affichage photos*/
 function photos_request() {
+
     $page = $_POST['page'];
     $offset = ($page - 1) * 8;
     $query = new WP_Query(array(
@@ -72,7 +75,7 @@ function photos_request() {
             $reference = get_field('reference', $post->ID); // Ajout de la référence
             $categorie = get_the_terms($post->ID, 'categorie')[0]->name; // Ajout de la catégorie
 
-            $photos[] = array(
+            $photo_url [] = array(
                 'ID' => $post->ID,
                 'post_title' => $post->post_title,
                 'thumbnail_url' => $thumbnail_url,
@@ -131,3 +134,5 @@ function filter_photos() {
 }
 add_action('wp_ajax_ajax_filter_photos', 'filter_photos');
 add_action('wp_ajax_nopriv_ajax_filter_photos', 'filter_photos');
+
+
