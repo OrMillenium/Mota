@@ -36,6 +36,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+/* récupération de la référence photo pour le champs de contact*/
+document.addEventListener('DOMContentLoaded', function() {
+    const contactLink = document.querySelector('#menu-item-47');
+    const contactBtn = document.querySelector('#contact-btn');
+    const modalOverlay = document.querySelector('.popup-overlay');
+    const refField = document.querySelector('#ref_field');
+
+    function openModal() {
+        modalOverlay.style.display = 'flex';
+        // Si refField existe et contactBtn a un attribut data-reference, préremplissez le champ.
+        if (refField && contactBtn.hasAttribute('data-reference')) {
+            refField.value = contactBtn.getAttribute('data-reference');
+        }
+    }
+
+    function closeModal() {
+        modalOverlay.style.display = 'none';
+    }
+
+    if (contactLink) {
+        contactLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal();
+        });
+    }
+
+    if (contactBtn) {
+        contactBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal();
+        });
+    }
+
+    window.addEventListener('click', function(event) {
+        if (event.target === modalOverlay) {
+            closeModal();
+        }
+    });
+});
+
+
+
+
 
 
 /*Affichage menu burger */
