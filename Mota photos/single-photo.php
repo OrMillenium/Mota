@@ -1,23 +1,14 @@
+
 <?php
 /*
 Template Name: Single
-
 */
-
 
 get_header();
 ?>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="<?php echo get_template_directory_uri() . '/js/script.js'; ?>"></script>
-
-
-
-
 <?php
 $photo_url = get_field('photos');
-var_dump(get_field('photos'));
 $type = get_field('type');
 $reference = get_field('référence');
 $categories = get_the_terms(get_the_ID(), 'categorie');
@@ -25,17 +16,23 @@ $formats = get_the_terms(get_the_ID(), 'format');
 $annees = get_the_terms(get_the_ID(), 'annee');
 $nextPost = get_next_post();
 $previousPost = get_previous_post();
-$thumbnail_url = get_the_post_thumbnail_url($post->ID, 'thumbnail');
 
-
-
+// Définissez les URLs des vignettes pour le post précédent et suivant
+$previousThumbnailURL = $previousPost ? get_the_post_thumbnail_url($previousPost->ID, 'thumbnail') : '';
+$nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumbnail') : '';
 ?>
 
 <section class="catalogue">
     <div class="gallery_pics" >
         <div class="photo-details">
-        <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
-        
+            <div class="related_block">
+                <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
+                <div class="overlay">
+                    <div class="fullscreen-icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
+                    </div>
+                </div>
+            </div>
             <div class="frame">
                 <h2><?php echo get_the_title(); ?></h2>
                 <div class="photo-champs">
@@ -65,36 +62,46 @@ $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'thumbnail');
         </div>
     </div>
     <div class="contenairContact"> 
-         <div class="contact"> 
-             <p> Cette photo vous intéresse ? </p>
-             <button id="contact-btn"  data-reference="<?php echo $reference; ?>">Contact</button>
-         </div>
-
-
-        
-        
-       
-         <div class="navPhotos"> 
-         
-         <div class="minPhoto">
-    
-    
-        <a href="<?php echo esc_url(get_permalink()); ?>">
-        <img src="<?php echo $thumbnail_url; ?>" alt="Thumbnail">
-        </a>
-    
-       
+        <div class="contact"> 
+            <p> Cette photo vous intéresse ? </p>
+            <button id="contact-btn"  data-reference="<?php echo $reference; ?>">Contact</button>
         </div>
+
+        <div class="navPhotos">
+            <!-- Conteneur pour la miniature de la photo précédente -->
+            <?php if ($previousThumbnailURL) : ?>
+                <div class="minPhoto minPhoto-left">
+                    <a href="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+                        <img src="<?php echo $previousThumbnailURL; ?>" alt="<?php echo esc_attr(get_the_title($previousPost->ID)); ?>">
+                    </a>
+                </div>
+            <?php endif; ?>
             
+            <!-- Conteneur pour la miniature de la photo suivante -->
+            <?php if ($nextThumbnailURL) : ?>
+                <div class="minPhoto minPhoto-right">
+                    <a href="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+                        <img src="<?php echo $nextThumbnailURL; ?>" alt="<?php echo esc_attr(get_the_title($nextPost->ID)); ?>">
+                    </a>
+                </div>
+            <?php endif; ?>
+
             <div class="navArrow">
-            
-            <img class="arrow arrow-left" data-previous-photo="<?php echo get_permalink($previousPost); ?>" src="<?php echo get_theme_file_uri() .'/assets/img/left.png';?>" alt="photos précèdente" >
-            <img class="arrow arrow-right" data-next-photo="<?php echo get_permalink($nextPost); ?>" src="<?php echo get_theme_file_uri() .'/assets/img/right.png';?>" alt="photos suivante" >
-            
-             </div>
-             
-          </div>
-    
+                <!-- Flèche gauche pour la photo précédente -->
+                <?php if (!empty($previousPost)) : ?>
+                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/assets/img/left.png'; ?>" alt="Photo précédente" data-previous-photo="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+                <?php endif; ?>
+                
+                <!-- Flèche droite pour la photo suivante -->
+                <?php if (!empty($nextPost)) : ?>
+                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/assets/img/right.png'; ?>" alt="Photo suivante" data-next-photo="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+                <?php endif;?>
+            </div>
+                   
+        </div>
+        
+       
+         
     </div>       
     
     

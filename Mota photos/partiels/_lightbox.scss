@@ -23,7 +23,18 @@
         height: 100%;
         object-fit: cover;
     }
+   @media screen and (max-width: 820px) {
+        width: 100%;
 
+
+    }
+
+    .overlay:hover .eye-icon,
+    .overlay:hover .fullscreen-icon {
+    display: block;
+  
+}
+}
     .overlay {
         position: absolute;
         top: 50%;
@@ -38,8 +49,45 @@
         &:hover {
             opacity: 0.8;
             background-color: rgba(0, 0, 0, 0.8); 
+
+            h2, h3 {
+                display: block;
+            }
         }
     
+        h2 {
+            position: absolute;
+            left: 10px;
+            top: 440px;
+            color: white;
+            font-family: 'poppins';
+            font-size: 14px;
+            display: none;
+
+            @media screen and (max-width: 465px) {
+                top: 265px;
+                font-size: 12px;
+            }
+        }
+
+        h3 {
+            position: absolute;
+            left: 476px;
+            top: 452px;
+            color: white;
+            font-family: 'poppins';
+            font-size: 14px;
+            display: none;
+
+
+            @media screen and (max-width: 465px) {
+                left: 265px;
+                top: 265px;
+                font-size: 12px;
+            }
+        }
+
+
 
         .eye-icon {
             width: 46px;
@@ -70,20 +118,9 @@
          
     }
 
-    @media screen and (max-width: 820px) {
-        width: 100%;
+    
 
 
-    }
-
-    .overlay:hover .eye-icon,
-    .overlay:hover .fullscreen-icon {
-    display: block;
-  
-}
-
-   
-}
 
 
 .lightbox {
@@ -138,7 +175,7 @@
             right: 20%;
         }
         
-        .lightbox img {
+        .lightbox-image {
             width: 564px;
             height: 495px;
             background-size: contain;

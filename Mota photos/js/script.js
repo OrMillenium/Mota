@@ -1,4 +1,4 @@
-console.log("Le JavaScript fonctionne correctement!");
+console.log("le JavaScript fonctionne correctement!")
 
 /*Affichage modale */
 
@@ -39,90 +39,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /*Affichage menu burger */
-let toggle_btn = document.querySelector('.toggle_btn');
+const toggle_btn = document.querySelector('.toggle_btn');
 const burger = document.querySelector('.Menu');
 
-if (toggle_btn && burger) {
+
     toggle_btn.addEventListener('click', () => {
         burger.classList.toggle('nav_open');
         toggle_btn.classList.toggle('active');
     });
-}
 
-const menuLinks = document.querySelectorAll('.MenuFull ul li a');
-menuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        burger.classList.remove('nav_open');
-        if (toggle_btn) {
-            toggle_btn.classList.remove('active');
-        }
+
+
+/* Affichage miniature*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    const minPhotoLeft = document.querySelector('.minPhoto-left');
+    const minPhotoRight = document.querySelector('.minPhoto-right');
+  
+    // Affichage de la miniature au survol des flèches
+    arrowLeft.addEventListener('mouseover', function() {
+      minPhotoLeft.style.display = 'block';
     });
-});
-
-/* Défilement miniatures page single */
-
-
-
-
-
-
-
-/*Ouverture et fermeture lightbox */
-$(document).ready(function() {
-    var $lightbox = $('.lightbox');
-    var relatedBlockCount = window.relatedBlockCount;
-
-    $('.fullscreen-icon').click(function(e) {
-        e.preventDefault();
-        var url = $(this).parent().prev().attr('src');
-        var categorie = $(this).data('categorie');
-        var reference = $(this).data('reference');
-        var index = $(this).data('index');
-
-        $lightbox.data('categorie', categorie);
-        $lightbox.data('reference', reference);
-        $lightbox.data('index', index);
-
-        $('.lightbox-category').text(categorie);
-        $('.lightbox-reference').text(reference);
-        $('.lightbox-photo').html('<img src="' + url + '">');
-
-        $lightbox.fadeIn();
+    arrowLeft.addEventListener('mouseout', function() {
+      minPhotoLeft.style.display = 'none';
     });
-
-    $('.lightbox-prev').click(function() {
-        var currentIndex = $lightbox.data('index');
-        currentIndex = (currentIndex - 1 + relatedBlockCount) % relatedBlockCount;
-        var photo_url = $('.fullscreen-icon').eq(currentIndex).data('imgurl');
-        var categorie = $('.fullscreen-icon').eq(currentIndex).data('categorie');
-        var reference = $('.fullscreen-icon').eq(currentIndex).data('reference');
-
-        $lightbox.data('categorie', categorie);
-        $lightbox.data('reference', reference);
-        $lightbox.data('index', currentIndex);
-
-        $('.lightbox-category').text(categorie);
-        $('.lightbox-reference').text(reference);
-        $('.lightbox-photo').html('<img src="' + photo_url + '">');
+  
+    arrowRight.addEventListener('mouseover', function() {
+      minPhotoRight.style.display = 'block';
     });
-
-    $('.lightbox-next').click(function() {
-        var currentIndex = $lightbox.data('index');
-        currentIndex = (currentIndex + 1) % relatedBlockCount;
-        var photo_url = $('.fullscreen-icon').eq(currentIndex).data('imgurl');
-        var categorie = $('.fullscreen-icon').eq(currentIndex).data('categorie');
-        var reference = $('.fullscreen-icon').eq(currentIndex).data('reference');
-
-        $lightbox.data('categorie', categorie);
-        $lightbox.data('reference', reference);
-        $lightbox.data('index', currentIndex);
-
-        $('.lightbox-category').text(categorie);
-        $('.lightbox-reference').text(reference);
-        $('.lightbox-photo').html('<img src="' + photo_url + '">');
+    arrowRight.addEventListener('mouseout', function() {
+      minPhotoRight.style.display = 'none';
     });
-
-    $('.close-lightbox').click(function() {
-        $lightbox.fadeOut();
+  
+    // Changement d'image au clic des flèches
+    arrowLeft.addEventListener('click', function() {
+      window.location.href = arrowLeft.getAttribute('data-previous-photo');
     });
-});
+    arrowRight.addEventListener('click', function() {
+      window.location.href = arrowRight.getAttribute('data-next-photo');
+    });
+  });
+  
+
+
+
