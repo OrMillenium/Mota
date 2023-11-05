@@ -25,14 +25,16 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
 <section class="catalogue">
     <div class="gallery_pics" >
         <div class="photo-details">
-            <div class="related_block">
-                <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
-                <div class="overlay">
-                    <div class="fullscreen-icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
-                    </div>
-                </div>
-            </div>
+           
+            <div class="photo-container">
+                     <img   src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
+                          <div class="overlaySingle">
+                                <div class="fullscreen-iconSingle"  >
+                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
+                                </div>
+                           </div>
+            </div> 
+        
             <div class="frame">
                 <h2><?php echo get_the_title(); ?></h2>
                 <div class="photo-champs">
@@ -97,8 +99,7 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
                     <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/assets/img/right.png'; ?>" alt="Photo suivante" data-next-photo="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
                 <?php endif;?>
             </div>
-                   
-        </div>
+                   </div>
         
        
          
