@@ -170,3 +170,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 })(jQuery);
+
+
+/* Filtres*/
+
+(function($){
+    // Fonction pour récupérer les photos en fonction des filtres
+    function fetchFilteredPhotos(){
+        var filter = {
+            'categorie': $('#categorie').val(),
+            'format': $('#format').val(),
+            'annee': $('#annee').val(),
+        };
+        
+        $.ajax({
+            url: ajaxloadmore.ajaxurl,
+            data: {
+                'action': 'filter_photos', // Vous créerez cette action dans functions.php
+                'filter': filter
+            },
+            type: 'POST',
+            beforeSend: function(){
+                $('#photos-container').html('<div class="loading">Chargement...</div>');
+            },
+            success: function(data) {
+                $('#photos-container').html(data);
+            }
+        });
+    }
+
+    // Attachez l'événement change aux sélecteurs pour déclencher la fonction de filtrage
+    $('#photo-filters select').on('change', function(){
+        fetchFilteredPhotos(); // Appel de la fonction lorsqu'un filtre est modifié
+    });
+})(jQuery);

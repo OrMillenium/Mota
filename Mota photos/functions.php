@@ -88,3 +88,61 @@ function load_more_photos() {
 }
 add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
 add_action('wp_ajax_load_more', 'load_more_photos');
+
+/*Filtres*/
+// Assurez-vous que l'action n'est pas déjà définie
+add_action('wp_ajax_filter_photos', 'filter_photos_function');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
+
+function filter_photos_function(){
+    // Récupérez les valeurs des filtres
+    $filter = $_POST['filter'];
+    
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => -1, // ou la limite que vous désirez
+        'tax_query' => array(
+            'relation' => 'AND',
+        )
+    );
+    
+    // Ajoutez chaque filtre à la tax query si elle est définie
+    if(!empty($filter['categorie'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $filter['categorie'],
+        );
+    }
+
+    if(!empty($filter['format'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $filter['format'],
+        );
+    }
+
+    if(!empty($filter['annee'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'annee',
+            'field'    => 'slug',
+            'terms'    => $filter['annee'],
+        );
+    }
+    
+    $query = new WP_Query($args);
+    
+    if($query->have_posts()){
+        while($query->have_posts()){
+            $query->the_post();
+            // Ici, vous allez appeler votre template ou le code HTML pour afficher les posts
+            get_template_part('template-parts/photo_block', null);
+        }
+        wp_reset_postdata();
+    } else {
+        echo 'Aucune photo correspondant aux critères de filtrage.';
+    }
+    
+    die();
+}
