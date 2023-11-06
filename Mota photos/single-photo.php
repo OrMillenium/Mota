@@ -113,13 +113,48 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
 <div class="Title">
     <h3>VOUS AIMEREZ AUSSI</h3>
 </div>
+ <div class="related">
 
-<?php echo get_template_part('template-parts/photo_block'); ?>
+<?php
+    $categories = get_the_terms(get_the_ID(), 'categorie');
+    if ($categories && !is_wp_error($categories)) {
+        $category_ids = wp_list_pluck($categories, 'term_id');
+        $args = array(
+            'post_type' => 'photo',
+            'posts_per_page' => 2,
+            'post__not_in' => array(get_the_ID()),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'categorie',
+                    'field' => 'term_id',
+                    'terms' => $category_ids,
+                ),
+            ),
+        );
+        $related_block = new WP_Query($args);
 
+        while ($related_block->have_posts()) {
+            $related_block->the_post();
+            $photo_url = get_the_post_thumbnail_url(null, "large");
+            $reference = get_field('référence');
+            $categorie_name = isset($categories[0]) ? $categories[0]->name : '';
+            ?>
+   
 
+        <?php  get_template_part('template-parts/photo_block'); ?>
+
+<?php
+            }
+        wp_reset_postdata();
+    } else {
+        echo '<p>No related photos found.</p>';
+    }
+    ?>
+
+</div>
 <button id="all_photos">
     <a href="<?php echo home_url(); ?>#photos-container">Toutes les photos</a>
 </button>
 
-
+  
 <?php get_footer(); ?>

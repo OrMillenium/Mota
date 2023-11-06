@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+
 /* récupération de la référence photo pour le champs de contact*/
 document.addEventListener('DOMContentLoaded', function() {
     const contactLink = document.querySelector('#menu-item-47');
@@ -90,7 +92,15 @@ const burger = document.querySelector('.Menu');
         burger.classList.toggle('nav_open');
         toggle_btn.classList.toggle('active');
     });
+/* FERMETURE MENU SUR CLIC LIEN */
 
+const menuLinks = document.querySelectorAll('.MenuFull ul li a');
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        burger.classList.remove('nav_open');
+        toggle_btn.classList.remove('active');
+    });
+});
 
 
 /* Affichage miniature*/
@@ -126,5 +136,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 
+/*Affichage pagination infinie*/
 
 
+(function($){
+    $('#load-more').click(function(){
+        var button = $(this),
+            data = {
+                'action': 'load_more',
+                'query': ajaxloadmore.query_vars,
+                'page': button.data('page')
+            };
+
+        $.ajax({
+            url: ajaxloadmore.ajaxurl,
+            data: data,
+            type: 'POST',
+            beforeSend: function(xhr) {
+                button.text('Chargement...');
+            },
+            success: function(data) {
+                if (data === 'no_posts') {
+                    button.remove(); // Supprimez le bouton s'il n'y a plus de posts
+                } else if(data) {
+                    button.data('page', button.data('page') + 1);
+                    var $newContent = $(data);
+                    $('#photo-block-more').before($newContent);
+                    button.text('Charger plus');
+                } else {
+                    button.text('Plus de photos à charger');
+                }
+            }
+        });
+    });
+})(jQuery);
