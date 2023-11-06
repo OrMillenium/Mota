@@ -136,40 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 
-/*Affichage pagination infinie*/
 
-
-(function($){
-    $('#load-more').click(function(){
-        var button = $(this),
-            data = {
-                'action': 'load_more',
-                'query': ajaxloadmore.query_vars,
-                'page': button.data('page')
-            };
-
-        $.ajax({
-            url: ajaxloadmore.ajaxurl,
-            data: data,
-            type: 'POST',
-            beforeSend: function(xhr) {
-                button.text('Chargement...');
-            },
-            success: function(data) {
-                if (data === 'no_posts') {
-                    button.remove(); // Supprimez le bouton s'il n'y a plus de posts
-                } else if(data) {
-                    button.data('page', button.data('page') + 1);
-                    var $newContent = $(data);
-                    $('#photo-block-more').before($newContent);
-                    button.text('Charger plus');
-                } else {
-                    button.text('Plus de photos à charger');
-                }
-            }
-        });
-    });
-})(jQuery);
 
 
 /* Filtres*/
@@ -202,5 +169,160 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attachez l'événement change aux sélecteurs pour déclencher la fonction de filtrage
     $('#photo-filters select').on('change', function(){
         fetchFilteredPhotos(); // Appel de la fonction lorsqu'un filtre est modifié
+    });
+})(jQuery);
+
+
+/*Lightbox ouverture et fermeture*/
+
+// Code pour la lightbox
+document.addEventListener('DOMContentLoaded', function() {
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImage = document.querySelector('.lightbox-image');
+    var lightboxCategory = document.querySelector('.lightbox-category');
+    var lightboxReference = document.querySelector('.lightbox-reference');
+    var currentIndex = 0; // Index de l'image actuellement affichée
+
+    function updateLightbox(index) {
+        var images = document.querySelectorAll('.fullscreen-icon');
+        var image = images[index];
+        lightboxImage.src = image.getAttribute('data-full');
+        lightboxCategory.textContent = image.getAttribute('data-category');
+        lightboxReference.textContent = image.getAttribute('data-reference');
+        currentIndex = index;
+    }
+
+    function openLightbox(index) {
+        updateLightbox(index);
+        lightbox.style.display = 'block';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+    }
+
+    // Cette fonction attache les événements aux images, y compris celles chargées dynamiquement
+    window.attachEventsToImages = function() {
+        var images = document.querySelectorAll('.fullscreen-icon');
+        images.forEach((image, index) => {
+            image.removeEventListener('click', imageClickHandler); // Supprime les anciens événements pour éviter les doublons
+            image.addEventListener('click', imageClickHandler); // Ajoute l'événement click
+        });
+    };
+
+    // Gestionnaire d'événement de click pour les images
+    function imageClickHandler(event) {
+        var images = document.querySelectorAll('.fullscreen-icon');
+        var index = Array.prototype.indexOf.call(images, event.target.closest('.fullscreen-icon'));
+        openLightbox(index);
+    }
+
+    // Attachez les événements initiaux aux images
+    attachEventsToImages();
+
+    // Fermeture de la lightbox
+    document.querySelector('.close-lightbox').addEventListener('click', closeLightbox);
+
+    // Navigation précédente
+    document.querySelector('.lightbox-prev').addEventListener('click', function() {
+        var images = document.querySelectorAll('.fullscreen-icon');
+        if (currentIndex > 0) {
+            updateLightbox(currentIndex - 1);
+        } else {
+            updateLightbox(images.length - 1);
+        }
+    });
+
+    // Navigation suivante
+    document.querySelector('.lightbox-next').addEventListener('click', function() {
+        var images = document.querySelectorAll('.fullscreen-icon');
+        if (currentIndex < images.length - 1) {
+            updateLightbox(currentIndex + 1);
+        } else {
+            updateLightbox(0);
+        }
+    });
+
+    // Fermer la lightbox si l'utilisateur clique en dehors de l'image
+    lightbox.addEventListener('click', function(event) {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+});
+
+// Code pour le chargement de plus d'images avec Ajax
+(function($) {
+    $('#load-more').click(function() {
+        var button = $(this),
+            data = {
+                'action': 'load_more',
+                'query': ajaxloadmore.query_vars,
+                'page': button.data('page')
+            };
+
+        $.ajax({
+            url: ajaxloadmore.ajaxurl,
+            data: data,
+            type: 'POST',
+            beforeSend: function(xhr) {
+                button.text('Chargement...');
+            },
+            success: function(data) {
+                if (data === 'no_posts') {
+                    button.remove();
+                } else if(data) {
+                    button.data('page', button.data('page') + 1);
+                    $('#photo-block-more').before($(data));
+                    button.text('Charger plus');
+                    attachEventsToImages(); // Réattacher les événements après chaque chargement
+                } else {
+                    button.text('Plus de photos à charger');
+                }
+            }
+        });
+    });
+})(jQuery);
+
+
+
+
+/*Affichage pagination infinie*/
+
+
+(function($){
+    $('#load-more').click(function(){
+        var button = $(this),
+            data = {
+                'action': 'load_more',
+                'query': ajaxloadmore.query_vars,
+                'page': button.data('page')
+            };
+
+        $.ajax({
+            url: ajaxloadmore.ajaxurl,
+            data: data,
+            type: 'POST',
+            beforeSend: function(xhr) {
+                button.text('Chargement...');
+            },
+            success: function(data) {
+                if (data === 'no_posts') {
+                    button.remove(); // Supprimez le bouton s'il n'y a plus de posts
+                } else if(data) {
+                    button.data('page', button.data('page') + 1);
+                    var $newContent = $(data);
+                    $('#photos-container').append($newContent); // Assurez-vous de modifier ici si nécessaire
+                    button.text('Charger plus');
+                    
+                    // Mettre à jour la lightbox avec les nouvelles images
+                    if(window.updateLightboxImages) {
+                        window.updateLightboxImages();
+                    }
+                } else {
+                    button.text('Plus de photos à charger');
+                }
+            }
+        });
     });
 })(jQuery);

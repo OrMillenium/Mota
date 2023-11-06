@@ -21,7 +21,7 @@ $categorie_name = $categories[0]->name;
                             <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/icon_eye.svg" alt="voir la photo">
                         </a>
                     </div>
-                    <div class="fullscreen-icon">
+                    <div class="fullscreen-icon" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($categorie_name); ?>" data-reference="<?php echo esc_attr($reference); ?>">
                         <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
                     </div>
                 </div>
