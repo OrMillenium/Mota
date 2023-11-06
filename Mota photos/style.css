@@ -601,7 +601,7 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-.photo-filters {
+#photo-filters {
   padding-top: 50px;
   width: 1140px;
   height: 43px;
