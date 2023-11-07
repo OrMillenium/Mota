@@ -201,10 +201,8 @@ h2 {
   font-size: 66px;
   font-style: italic;
   font-weight: 400;
-  line-height: 58px;
   text-transform: uppercase;
-  width: 420px;
-  height: 116px;
+  line-height: 58px;
 }
 @media (max-width: 1140px) {
   h2 {
@@ -885,10 +883,15 @@ h1 {
   font-size: 14px;
   display: none;
 }
-@media screen and (max-width: 465px) {
+@media screen and (max-width: 765px) {
   .overlay h2 {
-    top: 265px;
+    top: 241px;
     font-size: 12px;
+  }
+}
+@media screen and (min-width: 765px) and (max-width: 1140px) {
+  .overlay h2 {
+    top: 457px;
   }
 }
 .overlay h3 {
@@ -900,11 +903,16 @@ h1 {
   font-size: 14px;
   display: none;
 }
-@media screen and (max-width: 465px) {
+@media screen and (max-width: 765px) {
   .overlay h3 {
-    left: 265px;
-    top: 265px;
+    left: 240px;
+    top: 237px;
     font-size: 12px;
+  }
+}
+@media screen and (min-width: 765px) and (max-width: 1140px) {
+  .overlay h3 {
+    left: 289px;
   }
 }
 .overlay .eye-icon {
@@ -914,6 +922,17 @@ h1 {
   left: 255px;
   position: absolute;
   display: none;
+}
+@media screen and (max-width: 765px) {
+  .overlay .eye-icon {
+    top: 135px;
+    left: 140px;
+  }
+}
+@media screen and (min-width: 765px) and (max-width: 1140px) {
+  .overlay .eye-icon {
+    left: 175px;
+  }
 }
 .overlay .fullscreen-icon {
   position: absolute;
@@ -925,6 +944,17 @@ h1 {
   left: 512px;
   border: 1px;
   display: none;
+}
+@media screen and (max-width: 765px) {
+  .overlay .fullscreen-icon {
+    top: 17px;
+    left: 267px;
+  }
+}
+@media screen and (min-width: 765px) and (max-width: 1140px) {
+  .overlay .fullscreen-icon {
+    left: 317px;
+  }
 }
 
 .lightbox {
@@ -952,7 +982,7 @@ h1 {
 }
 @media screen and (max-width: 1140px) {
   .lightbox .close-lightbox {
-    right: -13%;
+    right: -8%;
   }
 }
 
@@ -1053,11 +1083,13 @@ h1 {
   .lightbox-reference {
     bottom: 62px;
     left: 205px;
+    width: 80px;
   }
 }
 @media screen and (min-width: 765px) and (max-width: 1140px) {
   .lightbox-reference {
     bottom: 223px;
+    width: 80px;
   }
 }
 
