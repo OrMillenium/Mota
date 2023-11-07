@@ -53,6 +53,8 @@
 
 
 
+
+
 <section id="photos-container" class="catalogue_block">
 
 <?php

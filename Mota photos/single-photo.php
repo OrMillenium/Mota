@@ -14,6 +14,7 @@ $reference = get_field('référence');
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $formats = get_the_terms(get_the_ID(), 'format');
 $annees = get_the_terms(get_the_ID(), 'annee');
+$categorie_name = $categories[0]->name;
 $nextPost = get_next_post();
 $previousPost = get_previous_post();
 
@@ -29,9 +30,9 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             <div class="photo-container">
                      <img   src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
                           <div class="overlaySingle">
-                                <div class="fullscreen-iconSingle"  >
-                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
-                                </div>
+                               <div class="fullscreen-icon" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($categorie_name); ?>" data-reference="<?php echo esc_attr($reference); ?>">
+                                     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/fullscreen.svg" alt="Icone fullscreen">
+                               </div>
                            </div>
             </div> 
         

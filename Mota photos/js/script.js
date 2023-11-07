@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* récupération de la référence photo pour le champs de contact*/
+
 document.addEventListener('DOMContentLoaded', function() {
     const contactLink = document.querySelector('#menu-item-47');
     const contactBtn = document.querySelector('#contact-btn');
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openModal() {
         modalOverlay.style.display = 'flex';
-        // Si refField existe et contactBtn a un attribut data-reference, préremplissez le champ.
+    
         if (refField && contactBtn.hasAttribute('data-reference')) {
             refField.value = contactBtn.getAttribute('data-reference');
         }
@@ -84,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /*Affichage menu burger */
+
 const toggle_btn = document.querySelector('.toggle_btn');
 const burger = document.querySelector('.Menu');
 
@@ -153,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $.ajax({
             url: ajaxloadmore.ajaxurl,
             data: {
-                'action': 'filter_photos', // Vous créerez cette action dans functions.php
+                'action': 'filter_photos', 
                 'filter': filter
             },
             type: 'POST',
@@ -166,16 +168,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Attachez l'événement change aux sélecteurs pour déclencher la fonction de filtrage
+    
     $('#photo-filters select').on('change', function(){
-        fetchFilteredPhotos(); // Appel de la fonction lorsqu'un filtre est modifié
+        fetchFilteredPhotos(); 
     });
 })(jQuery);
 
 
 /*Lightbox ouverture et fermeture*/
 
-// Code pour la lightbox
+
 document.addEventListener('DOMContentLoaded', function() {
     var lightbox = document.getElementById('lightbox');
     var lightboxImage = document.querySelector('.lightbox-image');
@@ -201,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lightbox.style.display = 'none';
     }
 
-    // Cette fonction attache les événements aux images, y compris celles chargées dynamiquement
+    // fonction attache les événements aux images,
     window.attachEventsToImages = function() {
         var images = document.querySelectorAll('.fullscreen-icon');
         images.forEach((image, index) => {
@@ -275,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     button.data('page', button.data('page') + 1);
                     $('#photo-block-more').before($(data));
                     button.text('Charger plus');
-                    attachEventsToImages(); // Réattacher les événements après chaque chargement
+                    attachEventsToImages(); 
                 } else {
                     button.text('Plus de photos à charger');
                 }
@@ -308,14 +310,14 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             success: function(data) {
                 if (data === 'no_posts') {
-                    button.remove(); // Supprimez le bouton s'il n'y a plus de posts
+                    button.remove(); // Supprime le bouton s'il n'y a plus de posts
                 } else if(data) {
                     button.data('page', button.data('page') + 1);
                     var $newContent = $(data);
-                    $('#photos-container').append($newContent); // Assurez-vous de modifier ici si nécessaire
+                    $('#photos-container').append($newContent); 
                     button.text('Charger plus');
                     
-                    // Mettre à jour la lightbox avec les nouvelles images
+                    // Met à jour la lightbox avec les nouvelles images
                     if(window.updateLightboxImages) {
                         window.updateLightboxImages();
                     }

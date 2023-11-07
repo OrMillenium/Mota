@@ -13,7 +13,7 @@
 
 <body <?php body_class(); ?>>
     
-   <header class="header">
+   <header class="site-header">
    
       <img src="<?php echo get_template_directory_uri(); ?>/assets/img/Logo.svg" alt="Logo">
    

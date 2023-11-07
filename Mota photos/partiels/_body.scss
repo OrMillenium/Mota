@@ -1,7 +1,7 @@
 /*body*/
 
 body{
-    width: 100%;
+    max-width: 1440px;
     ul{
         list-style-type: none;
     }
@@ -10,10 +10,29 @@ body{
         text-decoration: none;
         font-family: 'SpaceMono';
         text-transform: uppercase;
-}
+    }
+   
+
 }
 
+
+
+nav {
+    @media (max-width: 1140px) {
+      display: none;
+     }
+  }
+  
+
+
 /*Style*/
+
+
+
+
+
+
+
 h2 {
     
 font-family: Space Mono;

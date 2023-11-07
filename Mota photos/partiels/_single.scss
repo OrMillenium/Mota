@@ -55,29 +55,39 @@
     position: absolute;
     top: 0;
     left: 50%;
-    width: 50%; // Couvre la photo-container.
-    height: 100%; // Couvre la photo-container.
+    width: 50%; 
+    height: 100%; 
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0); 
+    opacity: 0; 
     transition: background-color 0.3s, opacity 0.3s;
     cursor: pointer;
-
+  
+   
     &:hover {
-        opacity: 0.8;
-        background-color: rgba(0, 0, 0, 0.8);
+      opacity: 0.8; 
+      background-color: rgba(0, 0, 0, 0.8); 
+      
+      .fullscreen-icon {
+        display: block; 
+      }
     }
-}
+  
+    // Styles pour l'icône de plein écran à l'intérieur de .overlaySingle
+    .fullscreen-icon {
+      display: none; 
+      left: 90%; 
+      position: absolute;
+      top: 2%; 
+      width: 34px;
+      height: 34px;
+    }
+  }
 
-.fullscreen-iconSingle {
-    display: none;
-    left:90%;
-    position: absolute;
-    top: 3%;
-}
+
 
 .photo-container:hover .fullscreen-iconSingle {
     display: block;
@@ -251,7 +261,11 @@
   }
 }
 
-
+.minPhoto-left a img, 
+.minPhoto-right a img {
+    transition: opacity 0.3s ease;
+    opacity: 0.5; 
+}
 
 
 
@@ -276,9 +290,10 @@
     
 
     &:hover {
+       
         cursor: pointer;
         background-color: black;
-        color: white;
+        color: white !important;
     }
 
     a {

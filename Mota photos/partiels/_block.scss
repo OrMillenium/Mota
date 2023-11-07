@@ -1,16 +1,33 @@
 
-.banner img{
-    width: 100%;
-    object-fit: cover;
+.banner {
+    height: 962px; 
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+        height: 253px;
+    
+    }
+         & img{
+         width: 100%;
+         height: 100%;
+         background-size: cover;
+         background-position: center;
+          object-fit: cover;
+          position:absolute;
+          top:3px;
+
+         }
+    
 }
 
 h1{
     
-        position: absolute;
+        position: relative;
         width: 53vw;
         height: 10vh;
-        left: 25vw;
-        top: 40vh;
         font-family: "Space Mono", sans-serif;
         font-style: italic;
         font-weight: 700;
@@ -21,8 +38,9 @@ h1{
         justify-content: center;
         text-transform: uppercase;
         color: transparent;
-        -webkit-text-stroke: 3px #ffffff; /* White 3px stroke */
+        -webkit-text-stroke: 3px #ffffff; 
         -webkit-text-fill-color: transparent;
+        z-index: 2;
       }
 
 
@@ -34,15 +52,21 @@ h1{
     display: flex;
     justify-content: space-between;
     margin: auto;
+    @media screen and (max-width: 765px)  {
+      width: 315px;
+  
+  }
+  @media screen and (min-width: 765px) and (max-width: 1140px) {
+    width: 715px;}
 
 }
 .catalogue_block {
     display: flex;
     flex-wrap: wrap;
-    width: 1140px;
     margin: auto;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 50px;
+    gap:10px;
 }
 
 .custom-select {
@@ -54,10 +78,62 @@ h1{
     padding-right: 18px;
     padding-bottom: 11px;
     padding-left: 18px;
+    background-color: transparent;
+     @media screen and (min-width: 768px) and (max-width: 1140px) {
+      width: 145px;
+  
+  }
+    @media screen and (max-width: 768px) {
+      width: 100px;
+       padding:0px;
+      height: 30px;
+      
     
+  }
+}
+     @media screen and (max-width: 768px) {
+           #categorie {
+        margin-right: 268px;
+          }
+      }
 
-    }
 
+      
+    .custom-select-ul {
+        li {
+          cursor: pointer;
+          padding: 10px; // ajustez à votre guise
+      
+          // Styles par défaut pour term-option
+          &.term-option {
+            background-color: #ffffff; // blanc par défaut
+            color: #000000; // texte noir par défaut
+      
+            &:hover {
+              background-color: #FFD6D6;
+            }
+      
+            &:active {
+              background-color: #FE5858;
+            }
+          }
+      
+          // Style spécifique pour l'option sélectionnée
+          &.term-option.selected {
+            background-color: #E00000;
+            color: #ffffff;
+          }
+      
+          // Style pour l'option par défaut
+          &.defaultOption {
+            background-color: #ddd; // Gris par défaut
+            color: #000;
+          }
+        }
+      }
+      
+   
+      
 
 .custom-select:focus {
     outline: none; 
@@ -108,4 +184,11 @@ h1{
 
 #photo-block-more{
     width: 100%;
+}
+
+.defaultOption {
+    &:hover{
+         background-color: #FFD6D6;
+    }
+   
 }
