@@ -39,14 +39,14 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             <div class="frame">
                 <h2><?php echo get_the_title(); ?></h2>
                 <div class="photo-champs">
-                    <p>Type: <?php echo $type; ?></p>
                     <p>Référence: <?php echo $reference; ?></p>
+                    <p>Type: <?php echo $type; ?></p>
                 </div>
                 <div class="taxonomies">
                     <?php
                     $taxonomies = [
-                        ['label' => 'Catégories', 'data' => $categories],
                         ['label' => 'Formats', 'data' => $formats],
+                        ['label' => 'Catégories', 'data' => $categories],
                         ['label' => 'Années', 'data' => $annees]
                     ];
                     ?>

@@ -3,10 +3,11 @@
     display: flex;
     flex-direction: column;
     padding-top: 76px;
-    height: 120vh;
     max-width: 80%;
     margin: auto;
-
+    @media screen and (max-width: 820px) {
+        max-width: 375px;
+    }
   
 
     
@@ -28,6 +29,9 @@
     justify-content: space-between;
     width: 100%;
     position: relative;
+    @media screen and (max-width: 820px) {
+        flex-direction: column;
+    }
 
     .photo-container{
         
@@ -109,7 +113,7 @@
      @media screen and (max-width: 820px) {
         width: 100%;
 
-          h2{width: 262px;
+          h2{width: 300px;
              height: 96px;
             }
         }
@@ -137,6 +141,9 @@
          line-height: 21px;
          letter-spacing: 0em;
          width: 263px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
        }
         }
  
@@ -187,7 +194,7 @@
 
 .pair {
     display: flex;
-    margin-bottom: 2%;
+    margin-bottom: 6%;
     
 }
 
@@ -311,7 +318,7 @@
     margin-bottom: 5%;
 
     @media screen and (max-width: 820px) {
-        margin-top: 53%;
+        margin-top: 10%;
 
          & h3{
              text-align: center;

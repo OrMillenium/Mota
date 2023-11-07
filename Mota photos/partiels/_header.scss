@@ -73,7 +73,7 @@
     }
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1140px) {
   .Menu {
     display: none;
     background: #E00000; 
@@ -85,12 +85,12 @@
       position: absolute;
       align-items: center;
       top: 80px;
-      left: 7px;
+      left: 8px;
       width: 96%;
       box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.08);
       height: 812px;
       padding-top: 206px;
-    
+      
 
       ul {
         display: flex;
@@ -111,12 +111,6 @@
     }
   }
 }
-
-
-
-
-
-
 
 
 
