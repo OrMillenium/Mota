@@ -26,12 +26,12 @@
 h1{
     
         position: relative;
-        width: 53vw;
+        width: 85vw;
         height: 10vh;
         font-family: "Space Mono", sans-serif;
         font-style: italic;
         font-weight: 700;
-        font-size: 5vw;
+        font-size: 8vw;
         line-height: 10vh;
         display: flex;
         align-items: center;
@@ -41,7 +41,10 @@ h1{
         -webkit-text-stroke: 3px #ffffff; 
         -webkit-text-fill-color: transparent;
         z-index: 2;
+        @media screen and (max-width: 768px) {
+          -webkit-text-stroke: 1px #ffffff; 
       }
+}
 
 
 

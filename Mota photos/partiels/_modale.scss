@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
-    top: 0;
+    top: 80px;
     left: 0;
     display:none;
 }
@@ -77,9 +77,10 @@
 @media screen and (max-width: 768px) {
     .popup-contact {
         width: 80%; /* Adjust the width as needed */
-        height: 90%; /* Allow the height to adjust based on content */
+        height: 87%; /* Allow the height to adjust based on content */
         max-width: 400px; /* Set a maximum width if desired */
         border: 3px solid #000000;
+        top: -42px;
         img{
             padding-top: 18px;
         }

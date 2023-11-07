@@ -238,7 +238,7 @@ h3 {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  top: 0;
+  top: 80px;
   left: 0;
   display: none;
 }
@@ -298,9 +298,10 @@ h3 {
 @media screen and (max-width: 768px) {
   .popup-contact {
     width: 80%; /* Adjust the width as needed */
-    height: 90%; /* Allow the height to adjust based on content */
+    height: 87%; /* Allow the height to adjust based on content */
     max-width: 400px; /* Set a maximum width if desired */
     border: 3px solid #000000;
+    top: -42px;
   }
   .popup-contact img {
     padding-top: 18px;
@@ -636,12 +637,12 @@ h3 {
 
 h1 {
   position: relative;
-  width: 53vw;
+  width: 85vw;
   height: 10vh;
   font-family: "Space Mono", sans-serif;
   font-style: italic;
   font-weight: 700;
-  font-size: 5vw;
+  font-size: 8vw;
   line-height: 10vh;
   display: flex;
   align-items: center;
@@ -651,6 +652,11 @@ h1 {
   -webkit-text-stroke: 3px #ffffff;
   -webkit-text-fill-color: transparent;
   z-index: 2;
+}
+@media screen and (max-width: 768px) {
+  h1 {
+    -webkit-text-stroke: 1px #ffffff;
+  }
 }
 
 #photo-filters {
