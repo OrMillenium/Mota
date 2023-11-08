@@ -245,21 +245,37 @@
                 &:hover + .minPhoto {
                     display: flex !important;
                 }
-            }
             
-        
+            
+        .arrow-left{
+            top: 10px;
+             position: relative;
+        }
+        .arrow-right{
+            top: 10px;
+            position: relative;
+        }
+    }
         
     
 }
+
+.minPhoto-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    /* autres styles nécessaires pour positionner et styliser vos miniatures */
+  }
 .minPhoto,
 .minPhoto-left,
 .minPhoto-right {
-  display:none;
-  position: relative;
+    visibility: hidden; // au lieu de display: none;
+    opacity: 0;
+    position: relative;
   height: 71px; 
   width: 81px; 
   top: 8px;
-  
+  transition: visibility 0,3s, opacity 0.3s linear; // Transition pour un effet de fondu
 
   a {
     display: block; 
@@ -273,17 +289,18 @@
     }
   }
 }
-
-.minPhoto-left a img, 
-.minPhoto-right a img {
-    transition: opacity 0.3s ease;
-    opacity: 0.5; 
-}
-
-
+  .arrow:hover + .minPhoto,
+  .arrow:hover + .minPhoto-left,
+  .arrow:hover + .minPhoto-right {
+    visibility: visible;
+    opacity: 1;
+  }
 
 
-  
+
+
+
+
 
 #all_photos {
     width: 272px;

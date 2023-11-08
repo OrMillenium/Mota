@@ -2,43 +2,6 @@ console.log("le JavaScript fonctionne correctement!")
 
 /*Affichage modale */
 
-document.addEventListener('DOMContentLoaded', function() {
-    const contactLink = document.querySelector('#menu-item-47');
-    const contactBtn = document.querySelector('#contact-btn');
-    const modalOverlay = document.querySelector('.popup-overlay');
-
-    function openModal() {
-        modalOverlay.style.display = 'flex';
-    }
-
-    function closeModal() {
-        modalOverlay.style.display = 'none';
-    }
-
-    if (contactLink) {
-        contactLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            openModal();
-        });
-    }
-
-    if (contactBtn) {
-        contactBtn.addEventListener('click', function(event) {
-            event.preventDefault();
-            openModal();
-        });
-    }
-
-    window.addEventListener('click', function(event) {
-        if (event.target === modalOverlay) {
-            closeModal();
-        }
-    });
-});
-
-
-
-/* récupération de la référence photo pour le champs de contact*/
 
 document.addEventListener('DOMContentLoaded', function() {
     const contactLink = document.querySelector('#menu-item-47');
@@ -106,37 +69,48 @@ menuLinks.forEach(link => {
 
 
 /* Affichage miniature*/
-
 document.addEventListener('DOMContentLoaded', function() {
     const arrowLeft = document.querySelector('.arrow-left');
     const arrowRight = document.querySelector('.arrow-right');
-    const minPhotoLeft = document.querySelector('.minPhoto-left');
-    const minPhotoRight = document.querySelector('.minPhoto-right');
-  
-    // Affichage de la miniature au survol des flèches
-    arrowLeft.addEventListener('mouseover', function() {
-      minPhotoLeft.style.display = 'block';
+    const minPhoto = document.getElementById('minPhoto');
+
+    arrowLeft && arrowLeft.addEventListener('mouseover', function() {
+        minPhoto.style.visibility = 'visible';
+        minPhoto.style.opacity = 1;
+        minPhoto.innerHTML = `<a href="${this.getAttribute('data-target-url')}">
+                                <img src="${this.getAttribute('data-thumbnail-url')}" alt="Photo précédente">
+                              </a>`;
     });
-    arrowLeft.addEventListener('mouseout', function() {
-      minPhotoLeft.style.display = 'none';
+
+    arrowLeft && arrowLeft.addEventListener('mouseout', function() {
+        minPhoto.style.visibility = 'hidden';
+        minPhoto.style.opacity = 0;
     });
-  
-    arrowRight.addEventListener('mouseover', function() {
-      minPhotoRight.style.display = 'block';
+
+    arrowRight && arrowRight.addEventListener('mouseover', function() {
+        minPhoto.style.visibility = 'visible';
+        minPhoto.style.opacity = 1;
+        minPhoto.innerHTML = `<a href="${this.getAttribute('data-target-url')}">
+                                <img src="${this.getAttribute('data-thumbnail-url')}" alt="Photo suivante">
+                              </a>`;
     });
-    arrowRight.addEventListener('mouseout', function() {
-      minPhotoRight.style.display = 'none';
+
+    arrowRight && arrowRight.addEventListener('mouseout', function() {
+        minPhoto.style.visibility = 'hidden';
+        minPhoto.style.opacity = 0;
     });
-  
-    // Changement d'image au clic des flèches
-    arrowLeft.addEventListener('click', function() {
-      window.location.href = arrowLeft.getAttribute('data-previous-photo');
+
+    arrowLeft && arrowLeft.addEventListener('click', function() {
+        window.location.href = this.getAttribute('data-target-url');
     });
-    arrowRight.addEventListener('click', function() {
-      window.location.href = arrowRight.getAttribute('data-next-photo');
+
+    arrowRight && arrowRight.addEventListener('click', function() {
+        window.location.href = this.getAttribute('data-target-url');
     });
-  });
-  
+});
+
+
+
 
 
 
