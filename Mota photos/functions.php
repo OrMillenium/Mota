@@ -74,16 +74,22 @@ function load_more_photos() {
 
     $photos = new WP_Query($query_vars);
     if ($photos->have_posts()) {
+        ob_start();
         while ($photos->have_posts()) {
             $photos->the_post();
             get_template_part('template-parts/photo_block', null);
         }
         wp_reset_postdata();
-    } else {
-        
+
+        $output = ob_get_clean(); // Get the buffer and clean it
+        echo $output; // Echo the output
+    } 
+    else {
+        ob_clean(); // Clean any previous output
         echo 'no_posts';
     }
-    die();
+        die();
+       
 }
 add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
 add_action('wp_ajax_load_more', 'load_more_photos');

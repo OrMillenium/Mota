@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             success: function(data) {
                 $('#photos-container').html(data);
+                attachEventsToImages();
             }
         });
     }
@@ -253,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Code pour le chargement de plus d'images avec Ajax
+//  Chargement de plus d'images avec Ajax
 (function($) {
     $('#load-more').click(function() {
         var button = $(this),
@@ -289,42 +290,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-/*Affichage pagination infinie*/
-
-
-(function($){
-    $('#load-more').click(function(){
-        var button = $(this),
-            data = {
-                'action': 'load_more',
-                'query': ajaxloadmore.query_vars,
-                'page': button.data('page')
-            };
-
-        $.ajax({
-            url: ajaxloadmore.ajaxurl,
-            data: data,
-            type: 'POST',
-            beforeSend: function(xhr) {
-                button.text('Chargement...');
-            },
-            success: function(data) {
-                if (data === 'no_posts') {
-                    button.remove(); // Supprime le bouton s'il n'y a plus de posts
-                } else if(data) {
-                    button.data('page', button.data('page') + 1);
-                    var $newContent = $(data);
-                    $('#photos-container').append($newContent); 
-                    button.text('Charger plus');
-                    
-                    // Met à jour la lightbox avec les nouvelles images
-                    if(window.updateLightboxImages) {
-                        window.updateLightboxImages();
-                    }
-                } else {
-                    button.text('Plus de photos à charger');
-                }
-            }
-        });
-    });
-})(jQuery);

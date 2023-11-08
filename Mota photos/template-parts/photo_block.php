@@ -1,5 +1,4 @@
 <?php
-
 $photo_url = get_the_post_thumbnail_url(null, "large");
 $photo_titre = get_the_title();
 $post_url = get_permalink();
