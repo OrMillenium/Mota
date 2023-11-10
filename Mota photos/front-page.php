@@ -63,7 +63,7 @@
      // Récupération de 8 photos aléatoires pour le bloc initial
           $args = array(
              'post_type' => 'photo',
-             'posts_per_page' => 8,
+             'posts_per_page' => 12,
               'orderby' => 'date',
              'order' => 'ASC',
             );

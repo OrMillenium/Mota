@@ -8,7 +8,7 @@ function theme_enqueue_styles() {
     
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 8,
+        'posts_per_page' => 12,
         'orderby' => 'rand',
         'order' => 'DESC' 
     );
@@ -69,7 +69,7 @@ function load_more_photos() {
     $paged = $_POST['page'] + 1; 
     $query_vars = json_decode(stripslashes($_POST['query']), true); 
     $query_vars['paged'] = $paged; 
-    $query_vars['posts_per_page'] = 8; 
+    $query_vars['posts_per_page'] = 12; 
     $query_vars['orderby'] = 'date'; 
 
     $photos = new WP_Query($query_vars);
