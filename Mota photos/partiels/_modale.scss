@@ -61,6 +61,7 @@
     border-radius: 8px;
     border: 1px;
     border: 1px solid #B8BBC2;
+    
 
 }
 
@@ -72,7 +73,11 @@
     justify-content: center;
     background: #D8D8D8;
     margin-top: -14px;
-
+    &:hover {
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
 }
 
 @media screen and (max-width: 768px) {

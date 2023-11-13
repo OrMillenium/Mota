@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var filter = {
             'categorie': $('#categorie').val(),
             'format': $('#format').val(),
-            'annee': $('#annee').val(),
+            'annee': $('#annee').val(), 
         };
         
         $.ajax({
@@ -139,12 +139,15 @@ document.addEventListener('DOMContentLoaded', function() {
             success: function(data) {
                 $('#photos-container').html(data);
                 attachEventsToImages();
-            }
-        });
+                setTimeout(function() {
+                document.getElementById('photos-container').scrollIntoView();
+            }, 0); // Ajustez le délai au besoin
+        }})
     }
 
     
-    $('#photo-filters select').on('change', function(){
+    $('#photo-filters select').on('change', function(event){
+        event.preventDefault(); // Empêche le comportement par défaut
         fetchFilteredPhotos(); 
     });
 })(jQuery);

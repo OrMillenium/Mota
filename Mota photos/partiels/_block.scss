@@ -1,3 +1,23 @@
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 
 .banner {
     height: 962px; 
@@ -5,6 +25,7 @@
     justify-content: center ;
     align-items: center;
     position: relative;
+
 
     @media screen and (max-width: 768px) {
         height: 253px;
@@ -18,6 +39,7 @@
           object-fit: cover;
           position:absolute;
           top:3px;
+          animation: zoomIn 5s ease-in-out;
 
          }
     
@@ -41,6 +63,7 @@ h1{
         -webkit-text-stroke: 3px #ffffff; 
         -webkit-text-fill-color: transparent;
         z-index: 2;
+        animation: 1s ease-out 0s 1 slideInFromLeft;
         @media screen and (max-width: 768px) {
           -webkit-text-stroke: 1px #ffffff; 
       }
@@ -68,7 +91,7 @@ h1{
     flex-wrap: wrap;
     margin: auto;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 43px;
     gap:10px;
 }
 

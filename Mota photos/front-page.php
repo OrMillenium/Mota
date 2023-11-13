@@ -52,12 +52,8 @@
 
 
 
-
-
-
-
-
 <section id="photos-container" class="catalogue_block">
+
 
     <?php
      // Récupération de 8 photos aléatoires pour le bloc initial
